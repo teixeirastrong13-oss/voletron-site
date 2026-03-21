@@ -33,6 +33,50 @@ const WHATSAPP_NUMBER = "5571999192508";
 const WHATSAPP_MESSAGE = "Olá! Gostaria de falar com o engenheiro sobre um projeto de energia solar.";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
+// Analytics IDs
+const GA_MEASUREMENT_ID = "G-ZRZF7G8DNS";
+const FB_PIXEL_ID = "1407734350658288";
+
+// Track WhatsApp click events
+const trackWhatsAppClick = (buttonLocation) => {
+  // Google Analytics 4 Event
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'click_whatsapp', {
+      event_category: 'engagement',
+      event_label: buttonLocation,
+      button_location: buttonLocation
+    });
+  }
+  
+  // Facebook Pixel Event
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'Lead');
+    window.fbq('trackCustom', 'lead_whatsapp', {
+      button_location: buttonLocation
+    });
+  }
+};
+
+// WhatsApp Link Component with tracking
+const WhatsAppLink = ({ children, className, location, testId }) => {
+  const handleClick = () => {
+    trackWhatsAppClick(location);
+  };
+
+  return (
+    <a 
+      href={WHATSAPP_URL} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      onClick={handleClick}
+      className={className}
+      data-testid={testId}
+    >
+      {children}
+    </a>
+  );
+};
+
 // Engineer photos
 const ENGINEER_PHOTOS = {
   main: "https://customer-assets.emergentagent.com/job_energia-solar-pro-1/artifacts/m4asag5b_Diego%20Teixeira%20Engenheiro.jpeg",
@@ -151,10 +195,10 @@ const Header = () => {
               data-testid="header-cta-button"
               className="bg-voletron-orange hover:bg-voletron-orange-dark text-voletron-navy font-bold px-5 py-2.5 rounded-full transition-all duration-300 transform hover:scale-105"
             >
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <WhatsAppLink location="header">
                 <Phone className="w-4 h-4 mr-2" />
                 Falar com Engenheiro
-              </a>
+              </WhatsAppLink>
             </Button>
           </nav>
 
@@ -190,10 +234,10 @@ const Header = () => {
                   data-testid="mobile-cta-button"
                   className="w-full bg-voletron-orange hover:bg-voletron-orange-dark text-voletron-navy font-bold py-3 rounded-full"
                 >
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                  <WhatsAppLink location="mobile-menu">
                     <Phone className="w-4 h-4 mr-2" />
                     Falar com Engenheiro
-                  </a>
+                  </WhatsAppLink>
                 </Button>
               </div>
             </nav>
@@ -232,11 +276,11 @@ const HeroSection = () => {
                 data-testid="hero-primary-cta"
                 className="bg-voletron-orange hover:bg-voletron-orange-dark text-voletron-navy font-bold text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                <WhatsAppLink location="hero">
                   <Phone className="w-5 h-5 mr-2" />
                   Falar com o Engenheiro
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </a>
+                </WhatsAppLink>
               </Button>
               <Button 
                 asChild
@@ -541,10 +585,10 @@ const CommercialCalculatorSection = () => {
                   data-testid="calculator-cta"
                   className="w-full bg-whatsapp hover:bg-whatsapp-dark text-white font-bold py-5 rounded-xl transition-all"
                 >
-                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                  <WhatsAppLink location="calculator-result">
                     <Phone className="w-5 h-5 mr-2" />
                     Quero meu projeto com simulação real
-                  </a>
+                  </WhatsAppLink>
                 </Button>
 
                 <div className="flex items-start gap-2 p-3 bg-slate-100 rounded-lg">
@@ -748,10 +792,10 @@ const TechnicalBenefitsSection = () => {
             data-testid="benefits-cta-button"
             className="bg-voletron-orange hover:bg-voletron-orange-dark text-voletron-navy font-bold text-lg px-10 py-5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
           >
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+            <WhatsAppLink location="benefits-cta">
               <Phone className="w-5 h-5 mr-2" />
               Solicitar Análise Técnica
-            </a>
+            </WhatsAppLink>
           </Button>
         </div>
       </div>
@@ -870,10 +914,10 @@ const AboutEngineerSection = () => {
               data-testid="engineer-cta"
               className="bg-voletron-orange hover:bg-voletron-orange-dark text-voletron-navy font-bold text-lg px-8 py-5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
             >
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <WhatsAppLink location="engineer-section">
                 <Phone className="w-5 h-5 mr-2" />
                 Tirar dúvidas com especialista
-              </a>
+              </WhatsAppLink>
             </Button>
           </div>
         </div>
@@ -950,10 +994,10 @@ const WhyEngineerSection = () => {
             data-testid="why-engineer-cta"
             className="bg-voletron-orange hover:bg-voletron-orange-dark text-voletron-navy font-bold text-lg px-10 py-5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
           >
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+            <WhatsAppLink location="why-engineer-section">
               <Phone className="w-5 h-5 mr-2" />
               Falar com o Engenheiro
-            </a>
+            </WhatsAppLink>
           </Button>
         </div>
       </div>
@@ -1052,10 +1096,10 @@ const ProjectsSection = () => {
             data-testid="projects-cta-button"
             className="bg-voletron-navy hover:bg-voletron-navy-dark text-white font-bold text-lg px-10 py-5 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
           >
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+            <WhatsAppLink location="projects-section">
               <Phone className="w-5 h-5 mr-2" />
               Solicitar proposta personalizada
-            </a>
+            </WhatsAppLink>
           </Button>
         </div>
       </div>
@@ -1100,10 +1144,10 @@ const FinalCTASection = () => {
             data-testid="final-cta-whatsapp"
             className="bg-whatsapp hover:bg-whatsapp-dark text-white font-bold text-xl px-12 py-6 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-105 whatsapp-pulse"
           >
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+            <WhatsAppLink location="final-cta">
               <Phone className="w-6 h-6 mr-3" />
               Falar com o Engenheiro
-            </a>
+            </WhatsAppLink>
           </Button>
         </div>
 
@@ -1154,7 +1198,7 @@ const Footer = () => {
               <a href="#beneficios" className="footer-link block text-sm">Como Trabalhamos</a>
               <a href="#engenheiro" className="footer-link block text-sm">Sobre o Engenheiro</a>
               <a href="#projetos" className="footer-link block text-sm">Projetos</a>
-              <a href={WHATSAPP_URL} className="footer-link block text-sm">Contato</a>
+              <WhatsAppLink location="footer-nav" className="footer-link block text-sm">Contato</WhatsAppLink>
             </nav>
           </div>
 
@@ -1162,16 +1206,14 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-bold text-white uppercase mb-4 text-sm">Contato</h4>
             <div className="space-y-3">
-              <a 
-                href={WHATSAPP_URL} 
-                target="_blank" 
-                rel="noopener noreferrer"
+              <WhatsAppLink 
+                location="footer-contact"
                 className="flex items-center gap-2 text-white/60 hover:text-voletron-orange transition-colors text-sm"
-                data-testid="footer-whatsapp"
+                testId="footer-whatsapp"
               >
                 <Phone className="w-4 h-4" />
                 (71) 99919-2508
-              </a>
+              </WhatsAppLink>
               <p className="text-white/60 text-sm">
                 Salvador - BA e região metropolitana
               </p>
@@ -1199,6 +1241,10 @@ const Footer = () => {
 
 // Floating WhatsApp Button
 const FloatingWhatsApp = () => {
+  const handleClick = () => {
+    trackWhatsAppClick('floating-button');
+  };
+
   return (
     <a 
       href={WHATSAPP_URL}
@@ -1206,6 +1252,7 @@ const FloatingWhatsApp = () => {
       rel="noopener noreferrer"
       className="floating-whatsapp"
       data-testid="floating-whatsapp"
+      onClick={handleClick}
     >
       <div className="bg-whatsapp hover:bg-whatsapp-dark text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110">
         <Phone className="w-7 h-7" />
@@ -1217,33 +1264,37 @@ const FloatingWhatsApp = () => {
 // Analytics Scripts Component
 const AnalyticsScripts = () => {
   useEffect(() => {
-    // Google Analytics
-    const gaId = window.GA_MEASUREMENT_ID || '';
-    if (gaId) {
-      const gaScript = document.createElement('script');
-      gaScript.async = true;
-      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-      document.head.appendChild(gaScript);
+    // Google Analytics 4
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    document.head.appendChild(gaScript);
+
+    gaScript.onload = () => {
       window.dataLayer = window.dataLayer || [];
-      function gtag(){window.dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', gaId);
-    }
+      window.gtag = function() { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA_MEASUREMENT_ID, {
+        page_title: 'Voletron Engenharia Elétrica - Energia Solar',
+        send_page_view: true
+      });
+      console.log('Google Analytics GA4 initialized:', GA_MEASUREMENT_ID);
+    };
 
     // Facebook Pixel
-    const fbPixelId = window.FB_PIXEL_ID || '';
-    if (fbPixelId) {
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      window.fbq('init', fbPixelId);
-      window.fbq('track', 'PageView');
-    }
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    window.fbq('init', FB_PIXEL_ID);
+    window.fbq('track', 'PageView');
+    console.log('Facebook Pixel initialized:', FB_PIXEL_ID);
+
   }, []);
 
   return null;
