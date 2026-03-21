@@ -1,0 +1,144 @@
+{
+  "project_name": "Voletron Engenharia Elétrica - Solar Landing Page",
+  "design_philosophy": {
+    "theme": "Engineering Authority & Solar Efficiency",
+    "core_values": [
+      "Trustworthiness (Engineering Expertise)",
+      "Efficiency (90% Savings)",
+      "Clarity (No-nonsense, direct)"
+    ],
+    "emotional_tone": "Professional, Reliable, Smart, Technical",
+    "visual_style": "Clean, Modern, Structured, High-Contrast"
+  },
+  "typography": {
+    "font_family": {
+      "heading": "Barlow Condensed, sans-serif",
+      "body": "Manrope, sans-serif"
+    },
+    "scale": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-none",
+      "h2": "text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight",
+      "h3": "text-2xl md:text-3xl font-semibold uppercase tracking-wide",
+      "body_large": "text-lg md:text-xl leading-relaxed text-slate-600",
+      "body_base": "text-base leading-relaxed text-slate-600",
+      "caption": "text-sm font-medium tracking-widest uppercase text-slate-500"
+    },
+    "imports": [
+      "@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap');"
+    ]
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "name": "Voletron Navy",
+        "hex": "#1e3a5f",
+        "tailwind": "bg-[#1e3a5f]",
+        "text": "text-[#1e3a5f]",
+        "usage": "Headings, Primary Backgrounds, Authority Sections"
+      },
+      "secondary": {
+        "name": "Solar Orange",
+        "hex": "#f5a623",
+        "tailwind": "bg-[#f5a623]",
+        "text": "text-[#f5a623]",
+        "usage": "CTAs, Highlights, Icons, 'Save Money' Metrics"
+      },
+      "accent": {
+        "name": "Engineering Blue",
+        "hex": "#3b82f6",
+        "tailwind": "bg-blue-500",
+        "usage": "Subtle gradients, secondary links"
+      },
+      "neutral": {
+        "light": "#f8fafc",
+        "dark": "#0f172a",
+        "white": "#ffffff"
+      }
+    },
+    "gradients": {
+      "hero_overlay": "bg-gradient-to-r from-[#1e3a5f]/95 to-[#1e3a5f]/70",
+      "subtle_glow": "bg-gradient-to-b from-white to-slate-50"
+    }
+  },
+  "spacing": {
+    "container": "container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl",
+    "section_padding": "py-20 md:py-32",
+    "element_gap": "gap-6 md:gap-8 lg:gap-12"
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#f5a623] hover:bg-[#d48c15] text-[#1e3a5f] font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 uppercase tracking-wide",
+      "secondary": "bg-transparent border-2 border-[#1e3a5f] text-[#1e3a5f] hover:bg-[#1e3a5f] hover:text-white font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 uppercase tracking-wide",
+      "whatsapp": "bg-[#25D366] hover:bg-[#1ebe57] text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300 transform hover:scale-105"
+    },
+    "cards": {
+      "base": "bg-white rounded-2xl shadow-sm border border-slate-100 p-8 hover:shadow-md transition-shadow duration-300",
+      "feature": "bg-slate-50 rounded-xl p-6 border-l-4 border-[#f5a623]"
+    },
+    "inputs": {
+      "default": "w-full px-4 py-3 rounded-lg border border-slate-300 focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/20 outline-none transition-all"
+    }
+  },
+  "layout_strategies": {
+    "hero": {
+      "type": "Asymmetrical Split",
+      "description": "Left: Bold Typography + Primary CTA. Right: Hero Image with geometric mask or slight overlap.",
+      "background": "White with subtle technical grid pattern opacity-5"
+    },
+    "bento_grid": {
+      "type": "Masonry/Bento",
+      "usage": "Benefits Section. Mix of large visuals and compact text blocks."
+    },
+    "authority_section": {
+      "style": "Dark Navy Background (#1e3a5f). White text. High contrast.",
+      "elements": "Engineer Bio, NBR 5410 Compliance Badge, Project Stats"
+    }
+  },
+  "assets": {
+    "logo_url": "https://customer-assets.emergentagent.com/job_energia-solar-pro-1/artifacts/53gv7at7_LOGO%20VOLETRON.png",
+    "icons_library": "lucide-react",
+    "images": {
+      "hero_bg": "https://images.pexels.com/photos/6961215/pexels-photo-6961215.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "family_savings": "https://images.pexels.com/photos/7642220/pexels-photo-7642220.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "commercial_building": "https://images.unsplash.com/photo-1735306334072-97e80c418c32?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBvZmZpY2UlMjBidWlsZGluZyUyMHdpdGglMjBzb2xhciUyMHBhbmVscyUyMHN1bm55JTIwZGF5fGVufDB8fHx8MTc3NDEwMzY2Nnww&ixlib=rb-4.1.0&q=85",
+      "engineer_working": "https://images.unsplash.com/photo-1700529289398-dd313f11c9cc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwyfHxtYWxlJTIwY29uc3RydWN0aW9uJTIwd29ya2VyJTIwaW5zdGFsbGluZyUyMHNvbGFyJTIwcGFuZWxzfGVufDB8fHx8MTc3NDEwMzY3NXww&ixlib=rb-4.1.0&q=85",
+      "tech_detail": "https://images.unsplash.com/photo-1772968927091-4ae5b3713f41?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHwyfHxzb2xhciUyMGVuZXJneSUyMGludmVydGVyJTIwY2xvc2UlMjB1cHxlbnwwfHx8fDE3NzQxMDM2NjR8MA&ixlib=rb-4.1.0&q=85"
+    }
+  },
+  "motion_guidelines": {
+    "library": "framer-motion",
+    "reduced_motion": "true",
+    "entrance": {
+      "initial": { "opacity": 0, "y": 20 },
+      "animate": { "opacity": 1, "y": 0 },
+      "transition": { "duration": 0.5, "ease": "easeOut" }
+    },
+    "hover": {
+      "scale": 1.02,
+      "transition": { "duration": 0.2 }
+    }
+  },
+  "accessibility": {
+    "contrast_check": "AA required, AAA preferred for text.",
+    "focus_states": "Visible ring-2 ring-offset-2 ring-[#f5a623] for all interactive elements.",
+    "semantic_html": "Use <header>, <main>, <section>, <article>, <footer> correctly."
+  },
+  "instructions_to_main_agent": [
+    "1. SETUP: Install fonts 'Barlow Condensed' and 'Manrope'. Update tailwind.config.js with the custom colors.",
+    "2. HERO: Build a high-impact hero. Headline: 'Reduza até 90% da sua Conta de Luz'. Subhead: 'Energia Solar com Engenharia de Verdade'. Primary CTA: 'Simular Economia no WhatsApp'.",
+    "3. AUTHORITY: Create a dedicated dark section (#1e3a5f bg) showcasing the Engineer's credentials (NBR 5410, 500kWp+). Use the 'engineer_working' image here.",
+    "4. PROOF: Use the 'commercial_building' and 'family_savings' images in a grid to show versatility (Residential + Commercial).",
+    "5. CTA: Use the sticky WhatsApp button approach for mobile, but also embed large CTA bands after the 'Benefits' and 'Proof' sections.",
+    "6. FOOTER: detailed footer with contact info, logo, and legal text.",
+    "7. PERFORMANCE: Use 'next/image' or optimized <img> tags with lazy loading for all images below the fold.",
+    "8. PRESERVE: Keep the 'Voletron' logo prominent in the header.",
+    "9. AVOID: Generic 'Save the planet' messaging. Focus on 'Save Money' and 'Engineering Quality'."
+  ],
+  "universal_guidelines": [
+    "Do not use generic centered layouts. Use asymmetry.",
+    "Dark colors look good when used independently without gradients.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur) for sticky headers.",
+    "Add 'data-testid' to all interactive elements."
+  ]
+}
