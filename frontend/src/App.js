@@ -44,17 +44,46 @@ const trackWhatsAppClick = (buttonLocation) => {
     window.gtag('event', 'click_whatsapp', {
       event_category: 'engagement',
       event_label: buttonLocation,
-      button_location: buttonLocation
+      button_location: buttonLocation,
+      transport_type: 'beacon' // Ensures event is sent even on navigation
     });
   }
   
-  // Facebook Pixel Event
+  // Facebook Pixel Event - Lead padrão + evento personalizado
   if (typeof window.fbq === 'function') {
-    window.fbq('track', 'Lead');
+    // Evento Lead padrão do Facebook (para otimização de campanhas)
+    window.fbq('track', 'Lead', {
+      content_name: 'WhatsApp Contact',
+      content_category: buttonLocation
+    });
+    
+    // Evento personalizado lead_whatsapp
     window.fbq('trackCustom', 'lead_whatsapp', {
-      button_location: buttonLocation
+      button_location: buttonLocation,
+      button_text: getButtonText(buttonLocation)
     });
   }
+  
+  console.log(`[Analytics] WhatsApp click tracked: ${buttonLocation}`);
+};
+
+// Helper para mapear localização para texto do botão
+const getButtonText = (location) => {
+  const buttonTexts = {
+    'header': 'Falar com Engenheiro',
+    'mobile-menu': 'Falar com Engenheiro',
+    'hero': 'Falar com o Engenheiro',
+    'calculator-result': 'Quero meu projeto com simulação real',
+    'benefits-cta': 'Solicitar Análise Técnica',
+    'engineer-section': 'Tirar dúvidas com especialista',
+    'why-engineer-section': 'Falar com o Engenheiro',
+    'projects-section': 'Solicitar proposta personalizada',
+    'final-cta': 'Falar com o Engenheiro',
+    'footer-nav': 'Contato',
+    'footer-contact': '(71) 99919-2508',
+    'floating-button': 'WhatsApp Flutuante'
+  };
+  return buttonTexts[location] || location;
 };
 
 // WhatsApp Link Component with tracking
@@ -273,10 +302,9 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in animate-delay-300">
               <Button 
                 asChild
-                data-testid="hero-primary-cta"
                 className="bg-voletron-orange hover:bg-voletron-orange-dark text-voletron-navy font-bold text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
-                <WhatsAppLink location="hero">
+                <WhatsAppLink location="hero" testId="hero-primary-cta">
                   <Phone className="w-5 h-5 mr-2" />
                   Falar com o Engenheiro
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -1265,35 +1293,43 @@ const FloatingWhatsApp = () => {
 const AnalyticsScripts = () => {
   useEffect(() => {
     // Google Analytics 4
-    const gaScript = document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    document.head.appendChild(gaScript);
+    if (!document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"]`)) {
+      const gaScript = document.createElement('script');
+      gaScript.async = true;
+      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+      document.head.appendChild(gaScript);
 
-    gaScript.onload = () => {
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function() { window.dataLayer.push(arguments); };
-      window.gtag('js', new Date());
-      window.gtag('config', GA_MEASUREMENT_ID, {
-        page_title: 'Voletron Engenharia Elétrica - Energia Solar',
-        send_page_view: true
-      });
-      console.log('Google Analytics GA4 initialized:', GA_MEASUREMENT_ID);
-    };
+      gaScript.onload = () => {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function() { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', GA_MEASUREMENT_ID, {
+          page_title: 'Voletron Engenharia Elétrica - Energia Solar',
+          send_page_view: true
+        });
+        console.log('Google Analytics GA4 initialized:', GA_MEASUREMENT_ID);
+      };
+    }
 
-    // Facebook Pixel
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    
-    window.fbq('init', FB_PIXEL_ID);
-    window.fbq('track', 'PageView');
-    console.log('Facebook Pixel initialized:', FB_PIXEL_ID);
+    // Facebook Pixel - Check if already initialized
+    if (!window.fbq) {
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      
+      window.fbq('init', FB_PIXEL_ID);
+      window.fbq('track', 'PageView');
+      console.log('Facebook Pixel initialized:', FB_PIXEL_ID);
+    } else {
+      // Pixel already loaded, just track PageView
+      window.fbq('track', 'PageView');
+      console.log('Facebook Pixel already loaded, PageView tracked');
+    }
 
   }, []);
 
